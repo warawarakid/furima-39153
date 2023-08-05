@@ -1,7 +1,7 @@
 
 # テーブル設計
 
-## users テーブル
+## Users テーブル
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ |-------------------------- |
@@ -17,11 +17,10 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_records
-- has_one  :payment_method
+- has_many :orders
 
 
-## items テーブル
+## Items テーブル
 
 | Column             | Type      | Options                        |
 | ------------------ | --------- |------------------------------- |
@@ -43,10 +42,10 @@
 - belongs_to_active_hash :shipping_charge
 - belongs_to_active_hash :shipping_area
 - belongs_to_active_hash :shipping_day
-- has_one :purchase_record
+- has_one :order
 
 
-## purchase records テーブル
+## Orders テーブル
 
 | Column     | Type     | Options                        |
 |------------|----------|------------------------------- |
@@ -58,23 +57,10 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shipping_address
+- has_one    :address
 
 
-## payment methods テーブル
-
-| Column          | Type    | Options                        |
-|-----------------|---------|------------------------------- |
-| user_id         | integer | null: false, foreign_key: true |
-| card_token      | string  | null: false                    |
-| expiration_date | date    | null: false                    |
-
-### Association
-
-- belongs_to :user
-
-
-## shipping addresses テーブル
+## Addresses テーブル
 
 | Column             | Type       | Options                        |
 |--------------------|------------|--------------------------------|
@@ -87,4 +73,4 @@
 | phone_number       | string     | null: false                    |
 
 #### Association
-- belongs_to :purchase_record
+- belongs_to :order
