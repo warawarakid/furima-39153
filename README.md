@@ -42,7 +42,7 @@
 - belongs_to_active_hash :shipping_charge
 - belongs_to_active_hash :prefecture
 - belongs_to_active_hash :shipping_day
-- belongs_to :order
+- has_one :order
 
 
 ## Orders テーブル
@@ -55,7 +55,7 @@
 ### Association
 
 - belongs_to :user
-- has_one :item
+- belongs_to :item
 - has_one :address
 
 
