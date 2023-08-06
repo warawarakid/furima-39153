@@ -29,7 +29,7 @@
 | category_id        | integer   | null: false                    |
 | condition_id       | integer   | null: false                    |
 | shipping_charge_id | integer   | null: false                    |
-| prefecture         | integer   | null: false                    |
+| prefecture_id      | integer   | null: false                    |
 | shipping_day_id    | integer   | null: false                    |
 | price              | integer   | null: false                    |
 | user               | references | null: false, foreign_key: true |
@@ -40,7 +40,7 @@
 - belongs_to_active_hash :category
 - belongs_to_active_hash :condition
 - belongs_to_active_hash :shipping_charge
-- belongs_to_active_hash :shipping_area
+- belongs_to_active_hash :prefecture
 - belongs_to_active_hash :shipping_day
 - has_one :order
 
@@ -55,8 +55,8 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :item
-- has_one    :address
+- has_one :item
+- has_one :address
 
 
 ## Addresses テーブル
@@ -65,7 +65,7 @@
 |--------------------|------------|--------------------------------|
 | order              | references | null: false, foreign_key: true |
 | postal_code        | string     | null: false                    |
-| prefecture         | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | string     | null: false                    |
 | street_address     | string     | null: false                    |
 | building_name      | string     |                                |
@@ -73,3 +73,4 @@
 
 #### Association
 - belongs_to :order
+- belongs_to_active_hash :prefecture
