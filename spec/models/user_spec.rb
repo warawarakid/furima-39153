@@ -13,7 +13,53 @@ RSpec.describe User, type: :model do
     end
     
     context 'ユーザ登録に失敗する場合' do
-      # 既存のテストコード
+      it 'nicknameが空だと登録できない' do
+        @user.nickname = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Nickname can't be blank"
+      end
+
+      it 'emailが空では登録できない' do
+        @user.email = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Email can't be blank"
+      end
+  
+      it 'passwordが空では登録できない' do
+        @user.password = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password can't be blank"
+      end
+  
+      it 'first_nameが空では登録できない' do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name can't be blank"
+      end
+  
+      it 'last_nameが空では登録できない' do
+        @user.last_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Last name can't be blank"
+      end
+  
+      it 'first_name_kanaが空では登録できない' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name kana can't be blank"
+      end
+  
+      it 'last_name_kanaが空では登録できない' do
+        @user.last_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Last name kana can't be blank"
+      end
+  
+      it 'birth_dayが空では登録できない' do
+        @user.birth_day = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Birth day can't be blank"
+      end
 
       it '重複したメールアドレスは登録できない' do
         another_user = FactoryBot.create(:user, email: @user.email)
@@ -46,9 +92,9 @@ RSpec.describe User, type: :model do
       end
 
       it '全角文字を含むパスワードでは登録できない' do
-        @user.password = 'abc123'
+        @user.password = 'abc１２３'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
       end
 
       it 'パスワードとパスワード（確認用）が不一致だと登録できない' do
