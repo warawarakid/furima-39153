@@ -1,9 +1,7 @@
 class Item < ApplicationRecord
-
-
   belongs_to :user
   has_one_attached :image
-  #has_one :order
+  # has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
 
@@ -14,7 +12,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
 
   with_options presence: true do
-    validates :name 
+    validates :name
     validates :description
     validates :image
     validates :price
@@ -23,10 +21,10 @@ class Item < ApplicationRecord
   validates :price, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 300,
-    less_than_or_equal_to: 9_999_999,
+    less_than_or_equal_to: 9_999_999
   }
 
-  with_options presence: true, numericality: { other_than: 1, message: "can't be blank"} do
+  with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
     validates :category_id
     validates :condition_id
     validates :shipping_charge_id
