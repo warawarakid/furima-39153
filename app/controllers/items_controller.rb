@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @order = @item.order
   end
 
   def edit
@@ -51,12 +52,14 @@ class ItemsController < ApplicationController
 
   def ensure_correct_user
     @item = Item.find(params[:id])
-    return if @item.user_id == current_user.id
+    if @item.user_id == current_user.id 
 
-    redirect_to root_path
+      redirect_to root_path if @item.order.present?
+    end
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
+
 end
