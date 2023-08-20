@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
 
   def ensure_correct_user
     @item = Item.find(params[:id])
-    return if @item.user_id == current_user.id
+    return if @item.user_id == current_user.id || @item.order.present?
 
     redirect_to root_path
   end
@@ -62,9 +62,4 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    if current_user.id == @item.user_id && @item.order.present?
-      redirect_to root_path
-    end
-  end
 end
