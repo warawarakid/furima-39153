@@ -52,10 +52,10 @@ class ItemsController < ApplicationController
 
   def ensure_correct_user
     @item = Item.find(params[:id])
-    if @item.user_id == current_user.id 
+    return if @item.user_id == current_user.id && !@item.order.present?
 
-      redirect_to root_path if @item.order.present?
-    end
+    redirect_to root_path 
+    
   end
 
   def set_item
